@@ -6,7 +6,7 @@ bool UpdateWeather(WeatherData *weatherdata)
     HTTPClient httpclient;
 
     // 建立http请求信息
-    String httpRequest = "http://api.seniverse.com/v3/weather/daily.json?key=S7skar8WdALdHwUke&location=ip&language=en";
+    String httpRequest = "http://api.seniverse.com/v3/weather/daily.json?key=[YOURKEY]&location=ip&language=en";
     httpclient.begin(wificlient, httpRequest);
 
     // 尝试连接服务器
