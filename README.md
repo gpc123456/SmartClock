@@ -7,7 +7,7 @@
 - Supports monitoring of environmental information, including temperature, humidity, and air pressure. 
 - Switch to Pomodoro Timer at any time to make work and study more efficient. 
 - Get weather conditions through the network, showing tomorrow's weather and precipitation probability
-- It can be powered by a built-in battery for 7 days, using the universal USB-C charging port 
+- Can be powered by a built-in battery for 7 days, using the universal USB-C charging port 
 - Compact and portable, you can take it anywhere. 
 
 ![DevicePhoto1](README_img/DevicePhoto1.jpg)
