@@ -89,7 +89,7 @@ void loop()
             delay(10);
             HomePage_PartRefreshWeather(Canvas, weatherdata, NowTime);
             OldHour = NowTime.hour;
-            FullRefreshTag = NEED_FULLREFRESH; //全刷1小时后再重置全刷标志位，防止重复刷新
+            FullRefreshTag = NEED_FULLREFRESH; // 全刷1小时后再重置全刷标志位，防止重复刷新
         }
 
         if (RefreshDatatimer % 3 == 0)
@@ -134,6 +134,6 @@ void loop()
     }
     if (RefreshDatatimer == 4294967293)
     {
-        RefreshDatatimer = 1; //防止数据溢出
+        RefreshDatatimer = 1; // 防止数据溢出
     }
 }

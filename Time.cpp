@@ -15,11 +15,12 @@ bool InitRTC()
     }
 }
 
-bool UpdateTime() //请在连接WIFI后执行本函数，如网络未连接可跳过
+bool UpdateTime() // 请在连接WIFI后执行本函数，如网络未连接可跳过
 {
     short SyncTimeTryTimes = 0;
     WiFiUDP ntpUDP;
-    NTPClient timeClient(ntpUDP, "ntp1.nim.ac.cn");
+    int time_offset = TIME_ZONE * 60 * 60;
+    NTPClient timeClient(ntpUDP, "ntp.aliyun.com", time_offset);
     timeClient.begin();
     timeClient.forceUpdate();
 

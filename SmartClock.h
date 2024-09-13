@@ -18,7 +18,7 @@
 #include "src/UnixTime.h"
 /*Weather*/
 #include <ESP8266HTTPClient.h>
-#include <ArduinoJson.h>
+#include "src/ArduinoJson.h"
 /*E-paper Display*/
 #include "src/DEV_Config.h"
 #include "src/EPD_2in9.h"
@@ -78,6 +78,9 @@
 #define HOMEPAGE 0
 #define POMODORO 1
 
+/*Time Zone*/
+#define TIME_ZONE 8 // From -12 to 12
+
 //-------------DataStructure-------------//
 struct TimeAndDate
 {
@@ -92,7 +95,7 @@ struct TimeAndDate
 
 struct WeatherData
 {
-    //首次初始化后请先将DataAvailableTag设为WDATA_UNAVAILABLE,待首次数据更新成功后改为WDATA_AVAILABLE,避免读空数据
+    // 首次初始化后请先将DataAvailableTag设为WDATA_UNAVAILABLE,待首次数据更新成功后改为WDATA_AVAILABLE,避免读空数据
     bool DataAvailableTag;
     TimeAndDate UpdateTime;
     char Location[100];
@@ -117,13 +120,13 @@ extern short ContinuedTomatoTime;
 
 //-------------Function-------------//
 /*GUI*/
-//StartPage
+// StartPage
 void StartPage();
-//HomePage
+// HomePage
 void HomePage_FullRefresh(UBYTE *Canvas, TimeAndDate TimeData, WeatherData weatherdata, float Temper, short Humidity, short Pressure, short BatteryLevel);
 void HomePage_PartRefreshTime_Temperature_Humidity_Airpressure_Battery(UBYTE *Canvas, TimeAndDate TimeData, float temperature, short humidity, short airpressure, short batterylevel);
 void HomePage_PartRefreshWeather(UBYTE *Canvas, WeatherData weatherdata, TimeAndDate TimeData);
-//Pomodoro
+// Pomodoro
 void Pomodoro_StartPage();
 void Pomodoro_ExitConfirm();
 void Pomodoro_HomePage_FullRefresh(UBYTE *Canvas, TimeAndDate TimeData, short battery_level, short PomodoroStatus, short time_remaining, float temper, short humidity, short tomato_number);
@@ -140,21 +143,21 @@ TimeAndDate ReadTimeAndDate();
 
 /*WiFi*/
 bool ConnectWiFi();
-void ShowWiFiConfigInfo();//GUI
-void ShowWiFiConfigSuccess();//GUI
-void ShowWiFiConnectedErr();//GUI
+void ShowWiFiConfigInfo();    // GUI
+void ShowWiFiConfigSuccess(); // GUI
+void ShowWiFiConnectedErr();  // GUI
 
 /*Weather*/
 bool UpdateWeather(WeatherData *weatherdata);
 short FindWeatherData(WeatherData weatherdata, TimeAndDate timedata);
 
 /*DataProcessing*/
-void TransNumberToStandNumberChar(char CharType[5], short NumType);//将绝对值<100的整数(5)转化为2位数字的格式(05)并输出到字符数组中
-float SimplifyTemperatureToOneDecimal(float rawdata); //将温度传感器返回的两位小数转化为一位小数，以0.5为单位进行舍入
+void TransNumberToStandNumberChar(char CharType[5], short NumType); // 将绝对值<100的整数(5)转化为2位数字的格式(05)并输出到字符数组中
+float SimplifyTemperatureToOneDecimal(float rawdata);               // 将温度传感器返回的两位小数转化为一位小数，以0.5为单位进行舍入
 
 /*Storage*/
-short GetTomatoNumber(TimeAndDate TimeData);//App_Pomodoro
-void AddTomatoNumber(TimeAndDate TimeData, short WillAddTomatoNumber);//App_Pomodoro
+short GetTomatoNumber(TimeAndDate TimeData);                           // App_Pomodoro
+void AddTomatoNumber(TimeAndDate TimeData, short WillAddTomatoNumber); // App_Pomodoro
 
 /*APP*/
 void App_Pomodoro(UBYTE *Canvas, short BatteryLevel, float NowTemp, short NowHumidity);
