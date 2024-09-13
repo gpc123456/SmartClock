@@ -35,9 +35,7 @@ bool UpdateTime() // 请在连接WIFI后执行本函数，如网络未连接可�
 
     if (rtc_pcf8563.begin() && timeClient.isTimeSet() == 1)
     {
-        UnixTime stamp(8);
-        stamp.getDateTime(timeClient.getEpochTime());
-        rtc_pcf8563.adjust(DateTime(stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second));
+        rtc_pcf8563.adjust(DateTime(timeClient.getEpochTime()));
         rtc_pcf8563.start();
         Serial.println("TimeSet Done!");
         timeClient.end();
