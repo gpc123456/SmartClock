@@ -12,6 +12,13 @@
 
 ![DevicePhoto1](README_img/DevicePhoto1.jpg)
 
+## Version 2.0 Updates:
+- Upgrade the device enclosure by no longer using clips but instead using screws to secure the lid and the PCB, making assembly and disassembly easier. 
+- Modified the battery level measurement circuit to reduce power consumption during battery level measurements. 
+- The PCB uses a four-layer board design for better electrical performance. Additionally, the placement of the temperature and humidity sensor has been optimized to minimize the impact of heat generated during charging on the sensor. 
+- Adding a timezone setting feature. 
+- The built-in ArduinoJson library simplifies the environmental configuration steps.
+
 ## Making Guidelines 
 There are the following folders in this project: 
 - Hardware
@@ -24,18 +31,26 @@ The following will show you how to make a SmartClock by explaining what the file
 
 ### Hardware 
 In the Hardware folder, you can see the following two types of files: 
-- **Compressed package beginning with Gerber_PCB:** These are the production files of the circuit board. You need to provide these two files to the corresponding circuit board manufacturer to make the circuit board used in this project.
-- **PDF file beginning with Schematic:** This is the schematic diagram of the circuit board to help you understand the composition of the circuit. 
+- **Compressed package ending with PCB:** These are the production files of the circuit board. You need to provide these two files to the corresponding circuit board manufacturer to make the circuit board used in this project. 
+- **PDF file ending with Schematic:** This is the schematic diagram of the circuit board to help you understand the composition of the circuit. 
 
-**Please note**: when you complete the circuit board, you also need to weld the corresponding components according to the schematic diagram before it can work normally. 
-
-This project contains two circuit boards. In order to save internal space, you need to use the I2C interface as shown in the following picture, and use 2.54mm row pin connectors to stack them vertically in the order of "MainBoard" below and "PCF8563_RTC" above: 
-
-![ConnectPCB](README_img/ConnectPCB.png)
+**Please note**: 
+When you complete the circuit board, you also need to weld the corresponding components according to the schematic diagram before it can work normally. The following are some key device selection references: 
+- MCU: ESP-12F (ESP8266) 
+- E-Paper: E029A01
+- Battery: 1000-2000 mAH (Size: [L:52mm, W:34mm, H:<10mm])
 
 
 ### Model
-This is the 3D design file of the SmartClock shell, if you need a shell for it, please use a 3D printer to print two files, they are the front shell and the back. 
+This is the 3D design file of the SmartClock shell, if you need a shell for it, please use a 3D printer to print two files, they are the main body shell and the upper cover. 
+
+**Please note**: 
+To secure the top cover, you need to insert knurled nuts into the screw holes on the main body. The size of the knurled nuts and the corresponding parameters of the screws are as follows: 
+- knurled nuts: M2*3.5(Outside diameter)*3(Height)
+![knurled nuts example](README_img/knurled_nuts_example.jpg) 
+
+- screws: M2*3(Height)
+![screws example](README_img/screws_example.jpg)
 
 ### bin
 This is the compiled firmware, and when you finish the circuit, you can use the serial port on the board to write the firmware to it. (PS. The main control chip uses ESP8266, you can find the corresponding finish firmware tutorial on the Internet yourself). 
@@ -47,9 +62,6 @@ This is the compiled firmware, and when you finish the circuit, you can use the 
 - Then follow the image below to locate the Boards Manager：
     ![arduino_add_board](README_img/arduino_add_board.png)
 - Search for esp8266 and install the appropriate toolkit
-- Install the following Libraries by searching for `arduinojson` in the Tools-Manage libraries: 
-
-    ![arduinojson](README_img/arduinojson.png)
 - Open the `SmartClock.ino` file in the root directory of the project using Arduino
 - Connect the board to your computer using a serial port, compile it using Arduino and upload the firmware to the board you made
 
